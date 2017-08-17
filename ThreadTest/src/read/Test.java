@@ -1,57 +1,56 @@
 package read;
-
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class Test {
-	
-	public static void main(String[] args){
+    
+    public static void main(String[] args){
         final BlockingQueue<String> queue = new ArrayBlockingQueue<String>(1);
-		for(int i=0;i<4;i++){
-			new Thread(new Runnable(){
-				@Override
-				public void run() {
-					while(true){
-						try {
-							String log = queue.take();
-							parseLog(log);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-				
-			}).start();
-		}
-		
-		System.out.println("begin:"+(System.currentTimeMillis()/1000));
-		/*Ä£Äâ´¦Àí16ÐÐÈÕÖ¾£¬ÏÂÃæµÄ´úÂë²úÉúÁË16¸öÈÕÖ¾¶ÔÏó£¬µ±Ç°´úÂëÐèÒªÔËÐÐ16Ãë²ÅÄÜ´òÓ¡ÍêÕâÐ©ÈÕÖ¾¡£
-		ÐÞ¸Ä³ÌÐò´úÂë£¬¿ªËÄ¸öÏß³ÌÈÃÕâ16¸ö¶ÔÏóÔÚ4ÃëÖÓ´òÍê¡£
-		*/
-		for(int i=0;i<16;i++){  //ÕâÐÐ´úÂë²»ÄÜ¸Ä¶¯
-			final String log = ""+(i+1);//ÕâÐÐ´úÂë²»ÄÜ¸Ä¶¯
-			{
-					try {
-						queue.put(log);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	     			//Test.parseLog(log);
-			}
-		}
-	}
-	
-	//parseLog·½·¨ÄÚ²¿µÄ´úÂë²»ÄÜ¸Ä¶¯
-	public static void parseLog(String log){
-		System.out.println(log+":"+(System.currentTimeMillis()/1000));
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}		
-	}
-	
+        for(int i=0;i<4;i++){
+            new Thread(new Runnable(){
+                @Override
+                public void run() {
+                    while(true){
+                        try {
+                            String log = queue.take();
+                            parseLog(log);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                
+            }).start();
+        }
+        
+        System.out.println("begin:"+(System.currentTimeMillis()/1000));
+        /*æ¨¡æ‹Ÿå¤„ç†16è¡Œæ—¥å¿—ï¼Œä¸‹é¢çš„ä»£ç äº§ç”Ÿäº†16ä¸ªæ—¥å¿—å¯¹è±¡ï¼Œå½“å‰ä»£ç éœ€è¦è¿è¡Œ16ç§’æ‰èƒ½æ‰“å°å®Œè¿™äº›æ—¥å¿—ã€‚
+        ä¿®æ”¹ç¨‹åºä»£ç ï¼Œå¼€å››ä¸ªçº¿ç¨‹è®©è¿™16ä¸ªå¯¹è±¡åœ¨4ç§’é’Ÿæ‰“å®Œã€‚
+        */
+        for(int i=0;i<16;i++){  //è¿™è¡Œä»£ç ä¸èƒ½æ”¹åŠ¨
+            final String log = ""+(i+1);//è¿™è¡Œä»£ç ä¸èƒ½æ”¹åŠ¨
+            {
+                    try {
+                        queue.put(log);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    //Test.parseLog(log);
+            }
+        }
+    }
+    
+    //parseLogæ–¹æ³•å†…éƒ¨çš„ä»£ç ä¸èƒ½æ”¹åŠ¨
+    public static void parseLog(String log){
+        System.out.println(log+":"+(System.currentTimeMillis()/1000));
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }       
+    }
+    
 }

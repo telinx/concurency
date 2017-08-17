@@ -1,37 +1,41 @@
 package cn.itcast.heima2;
+
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class CyclicBarrierTest {
 
-	public static void main(String[] args) {
-		ExecutorService service = Executors.newCachedThreadPool();
-		final  CyclicBarrier cb = new CyclicBarrier(3);
-		for(int i=0;i<3;i++){
-			Runnable runnable = new Runnable(){
-					public void run(){
-					try {
-						Thread.sleep((long)(Math.random()*10000));	
-						System.out.println("Ïß³Ì" + Thread.currentThread().getName() + 
-								"¼´½«µ½´ï¼¯ºÏµØµã1£¬µ±Ç°ÒÑÓÐ" + (cb.getNumberWaiting()+1) + "¸öÒÑ¾­µ½´ï£¬" + (cb.getNumberWaiting()==2?"¶¼µ½ÆëÁË£¬¼ÌÐø×ß°¡":"ÕýÔÚµÈºò"));						
-						cb.await();
-						
-						Thread.sleep((long)(Math.random()*10000));	
-						System.out.println("Ïß³Ì" + Thread.currentThread().getName() + 
-								"¼´½«µ½´ï¼¯ºÏµØµã2£¬µ±Ç°ÒÑÓÐ" + (cb.getNumberWaiting()+1) + "¸öÒÑ¾­µ½´ï£¬" + (cb.getNumberWaiting()==2?"¶¼µ½ÆëÁË£¬¼ÌÐø×ß°¡":"ÕýÔÚµÈºò"));
-						cb.await();	
-						Thread.sleep((long)(Math.random()*10000));	
-						System.out.println("Ïß³Ì" + Thread.currentThread().getName() + 
-								"¼´½«µ½´ï¼¯ºÏµØµã3£¬µ±Ç°ÒÑÓÐ" + (cb.getNumberWaiting() + 1) + "¸öÒÑ¾­µ½´ï£¬" + (cb.getNumberWaiting()==2?"¶¼µ½ÆëÁË£¬¼ÌÐø×ß°¡":"ÕýÔÚµÈºò"));						
-						cb.await();						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}				
-				}
-			};
-			service.execute(runnable);
-		}
-		service.shutdown();
-	}
+    public static void main(String[] args) {
+        ExecutorService service = Executors.newCachedThreadPool();
+        final CyclicBarrier cb = new CyclicBarrier(3);
+        for (int i = 0; i < 3; i++) {
+            Runnable runnable = new Runnable() {
+                public void run() {
+                    try {
+                        Thread.sleep((long) (Math.random() * 10000));
+                        System.out.println(
+                                "çº¿ç¨‹" + Thread.currentThread().getName() + "å³å°†åˆ°è¾¾é›†åˆåœ°ç‚¹1ï¼Œå½“å‰å·²æœ‰" + (cb.getNumberWaiting() + 1)
+                                        + "ä¸ªå·²ç»åˆ°è¾¾ï¼Œ" + (cb.getNumberWaiting() == 2 ? "éƒ½åˆ°é½äº†ï¼Œç»§ç»­èµ°å•Š" : "æ­£åœ¨ç­‰å€™"));
+                        cb.await();
+
+                        Thread.sleep((long) (Math.random() * 10000));
+                        System.out.println(
+                                "çº¿ç¨‹" + Thread.currentThread().getName() + "å³å°†åˆ°è¾¾é›†åˆåœ°ç‚¹2ï¼Œå½“å‰å·²æœ‰" + (cb.getNumberWaiting() + 1)
+                                        + "ä¸ªå·²ç»åˆ°è¾¾ï¼Œ" + (cb.getNumberWaiting() == 2 ? "éƒ½åˆ°é½äº†ï¼Œç»§ç»­èµ°å•Š" : "æ­£åœ¨ç­‰å€™"));
+                        cb.await();
+                        Thread.sleep((long) (Math.random() * 10000));
+                        System.out.println(
+                                "çº¿ç¨‹" + Thread.currentThread().getName() + "å³å°†åˆ°è¾¾é›†åˆåœ°ç‚¹3ï¼Œå½“å‰å·²æœ‰" + (cb.getNumberWaiting() + 1)
+                                        + "ä¸ªå·²ç»åˆ°è¾¾ï¼Œ" + (cb.getNumberWaiting() == 2 ? "éƒ½åˆ°é½äº†ï¼Œç»§ç»­èµ°å•Š" : "æ­£åœ¨ç­‰å€™"));
+                        cb.await();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            service.execute(runnable);
+        }
+        service.shutdown();
+    }
 }

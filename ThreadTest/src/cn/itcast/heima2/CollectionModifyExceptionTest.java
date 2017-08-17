@@ -1,26 +1,28 @@
 package cn.itcast.heima2;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 public class CollectionModifyExceptionTest {
-	public static void main(String[] args) {
-		Collection users = new CopyOnWriteArrayList();
-			
-			//new ArrayList();
-		users.add(new User("ÕÅÈý",28));	
-		users.add(new User("ÀîËÄ",25));			
-		users.add(new User("ÍõÎå",31));	
-		Iterator itrUsers = users.iterator();
-		while(itrUsers.hasNext()){
-			System.out.println("aaaa");
-			User user = (User)itrUsers.next();
-			if("ÀîËÄ".equals(user.getName())){
-				users.remove(user);
-				//itrUsers.remove();
-			} else {
-				System.out.println(user);				
-			}
-		}
-	}
-}	 
+    public static void main(String[] args) {
+        Collection users = new CopyOnWriteArrayList();
+
+        // new ArrayList();
+        users.add(new User("ï¿½ï¿½ï¿½ï¿½", 28));
+        users.add(new User("ï¿½ï¿½ï¿½ï¿½", 25));
+        users.add(new User("ï¿½ï¿½ï¿½ï¿½", 31));
+        Iterator itrUsers = users.iterator();
+        while (itrUsers.hasNext()) {
+            System.out.println("aaaa");
+            User user = (User) itrUsers.next();
+            if ("ï¿½ï¿½ï¿½ï¿½".equals(user.getName())) {
+                users.remove(user);
+                // itrUsers.remove();
+            } else {
+                System.out.println(user);
+            }
+        }
+    }
+}

@@ -1,44 +1,41 @@
 package cn.itcast.heima2;
+
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ExchangerTest {
 
-	public static void main(String[] args) {
-		ExecutorService service = Executors.newCachedThreadPool();
-		final Exchanger exchanger = new Exchanger();
-		service.execute(new Runnable(){
-			public void run() {
-				try {				
+    public static void main(String[] args) {
+        ExecutorService service = Executors.newCachedThreadPool();
+        final Exchanger exchanger = new Exchanger();
+        service.execute(new Runnable() {
+            public void run() {
+                try {
 
-					String data1 = "zxx";
-					System.out.println("Ïß³Ì" + Thread.currentThread().getName() + 
-					"ÕıÔÚ°ÑÊı¾İ" + data1 +"»»³öÈ¥");
-					Thread.sleep((long)(Math.random()*10000));
-					String data2 = (String)exchanger.exchange(data1);
-					System.out.println("Ïß³Ì" + Thread.currentThread().getName() + 
-					"»»»ØµÄÊı¾İÎª" + data2);
-				}catch(Exception e){
-					
-				}
-			}	
-		});
-		service.execute(new Runnable(){
-			public void run() {
-				try {				
+                    String data1 = "zxx";
+                    System.out.println("çº¿ç¨‹" + Thread.currentThread().getName() + "æ­£åœ¨æŠŠæ•°æ®" + data1 + "æ¢å‡ºå»");
+                    Thread.sleep((long) (Math.random() * 10000));
+                    String data2 = (String) exchanger.exchange(data1);
+                    System.out.println("çº¿ç¨‹" + Thread.currentThread().getName() + "æ¢å›çš„æ•°æ®ä¸º" + data2);
+                } catch (Exception e) {
 
-					String data1 = "lhm";
-					System.out.println("Ïß³Ì" + Thread.currentThread().getName() + 
-					"ÕıÔÚ°ÑÊı¾İ" + data1 +"»»³öÈ¥");
-					Thread.sleep((long)(Math.random()*10000));					
-					String data2 = (String)exchanger.exchange(data1);
-					System.out.println("Ïß³Ì" + Thread.currentThread().getName() + 
-					"»»»ØµÄÊı¾İÎª" + data2);
-				}catch(Exception e){
-					
-				}				
-			}	
-		});		
-	}
+                }
+            }
+        });
+        service.execute(new Runnable() {
+            public void run() {
+                try {
+
+                    String data1 = "lhm";
+                    System.out.println("çº¿ç¨‹" + Thread.currentThread().getName() + "æ­£åœ¨æŠŠæ•°æ®" + data1 + "æ¢å‡ºå»");
+                    Thread.sleep((long) (Math.random() * 10000));
+                    String data2 = (String) exchanger.exchange(data1);
+                    System.out.println("çº¿ç¨‹" + Thread.currentThread().getName() + "æ¢å›çš„æ•°æ®ä¸º" + data2);
+                } catch (Exception e) {
+
+                }
+            }
+        });
+    }
 }

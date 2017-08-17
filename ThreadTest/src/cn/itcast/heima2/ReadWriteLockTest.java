@@ -5,62 +5,61 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ReadWriteLockTest {
-	public static void main(String[] args) {
-		final Queue3 q3 = new Queue3();
-		for(int i=0;i<3;i++)
-		{
-			new Thread(){
-				public void run(){
-					while(true){
-						q3.get();						
-					}
-				}
-				
-			}.start();
+    public static void main(String[] args) {
+        final Queue3 q3 = new Queue3();
+        for (int i = 0; i < 3; i++) {
+            new Thread() {
+                public void run() {
+                    while (true) {
+                        q3.get();
+                    }
+                }
 
-			new Thread(){
-				public void run(){
-					while(true){
-						q3.put(new Random().nextInt(10000));
-					}
-				}			
-				
-			}.start();
-		}
-		
-	}
+            }.start();
+
+            new Thread() {
+                public void run() {
+                    while (true) {
+                        q3.put(new Random().nextInt(10000));
+                    }
+                }
+
+            }.start();
+        }
+
+    }
 }
 
-class Queue3{
-	private Object data = null;//¹²ÏíÊý¾Ý£¬Ö»ÄÜÓÐÒ»¸öÏß³ÌÄÜÐ´¸ÃÊý¾Ý£¬µ«¿ÉÒÔÓÐ¶à¸öÏß³ÌÍ¬Ê±¶Á¸ÃÊý¾Ý¡£
-	ReadWriteLock rwl = new ReentrantReadWriteLock();
-	public void get(){
-		rwl.readLock().lock();
-		try {
-			System.out.println(Thread.currentThread().getName() + " be ready to read data!");
-			Thread.sleep((long)(Math.random()*1000));
-			System.out.println(Thread.currentThread().getName() + "have read data :" + data);			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}finally{
-			rwl.readLock().unlock();
-		}
-	}
-	
-	public void put(Object data){
+class Queue3 {
+    private Object data = null;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ß³ï¿½Í¬Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+    ReadWriteLock rwl = new ReentrantReadWriteLock();
 
-		rwl.writeLock().lock();
-		try {
-			System.out.println(Thread.currentThread().getName() + " be ready to write data!");					
-			Thread.sleep((long)(Math.random()*1000));
-			this.data = data;		
-			System.out.println(Thread.currentThread().getName() + " have write data: " + data);					
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}finally{
-			rwl.writeLock().unlock();
-		}
-		
-	
-	}
+    public void get() {
+        rwl.readLock().lock();
+        try {
+            System.out.println(Thread.currentThread().getName() + " be ready to read data!");
+            Thread.sleep((long) (Math.random() * 1000));
+            System.out.println(Thread.currentThread().getName() + "have read data :" + data);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            rwl.readLock().unlock();
+        }
+    }
+
+    public void put(Object data) {
+
+        rwl.writeLock().lock();
+        try {
+            System.out.println(Thread.currentThread().getName() + " be ready to write data!");
+            Thread.sleep((long) (Math.random() * 1000));
+            this.data = data;
+            System.out.println(Thread.currentThread().getName() + " have write data: " + data);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            rwl.writeLock().unlock();
+        }
+
+    }
 }
